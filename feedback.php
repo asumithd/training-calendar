@@ -1,81 +1,65 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>HRD MANAGEMENT</title>
-
-    <!--  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">-->
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-    <!-- Custom styles for this template -->
-    <link href="css/signin.css" rel="stylesheet">
-  </head>
-    <body>
       <?php require_once 'process4.php';?>
-      <?php	if(isset($_SESSION['message'])): ?>
-        <div class="container">
-          <div class="row justify_content_center">
-            <div class="alert alert-<?=$_SESSION['msg_type']?>">
-    					 <?php
-    							echo $_SESSION['message'];
-    							unset($_SESSION['message']);
-    					 ?>
-    				</div>
-    						<?php endif ?>
-          </div>
-        </div>
+      <?php require_once 'header.php';?>
       <?php
         $mysqli = new mysqli('localhost','asumithd','Admin123@@','hrdcfa') or die (mysqli_error($mysqli));
         $result=$mysqli->query("select * from t_feedback") or die($mysqli->error());
       ?>
-      <?php
-      function pre_r($array){
-        echo '<pre>';
-        print_r($array);
-        echo '</pre>';
-        }
-      ?>
+      <main role="main" class="container" >
+
       <div class="container">
-        <div class="row justify_content_center">
-          <form class="form-signin" method="POST" action="process4.php">
-            <h1 class="h3 mb-3 font-weight-normal"> Employee Feedback</h1>
+        <?php require_once 'session.php';?>
+        <h1 class="h3 mb-3 font-weight-normal"> Employee Feedback</h1>
+            <form class="form-inline" method="POST" action="process4.php">
+            <div class="row justify_content_center">
+              <div class="form-group">
             <label for="inputSerialNo" class="sr-only">Serial No</label>
             <input type="hidden" id="inputSerialNo" class="form-control"
              name="id" value="<?php echo $id;?>" placeholder="Serial No" required>
+           </div>
+           <div class="form-group">
             <label for="inputCourseid" class="sr-only">Course Id</label>
             <input type="text" id="inputCourseid" class="form-control"
              name="courseid" value="<?php echo $courseid;?>" placeholder="Course Id" required>
+           </div>
+           <div class="form-group">
             <label for="inputEmployeeId" class="sr-only">Employee Id</label>
             <input type="text" id="inputEmployeeId" class="form-control"
              name="empid" value="<?php echo $empid;?>" placeholder="Employee Id" required>
-             <label for="inputDescription1" class="sr-only">Description1</label>
-             <input type="text" id="inputDescription1" class="form-control"
-              name="description1" value="<?php echo $description1;?>" placeholder="Description1" required>
-              <label for="inputDescription2" class="sr-only">Description2</label>
-              <input type="text" id="inputDescription" class="form-control"
-               name="description2" value="<?php echo $description2;?>" placeholder="Description2" required>
-               <label for="inputDescription3" class="sr-only">Description3</label>
-               <input type="text" id="inputDescription" class="form-control"
-                name="description3" value="<?php echo $description3;?>" placeholder="Description3" required>
+           </div>
+           <div class="form-group">
+             <label for="inputMark1" class="sr-only">Mark 1</label>
+              <select class="form-control" id="inputMark1" name="description1" value="<?php echo $description1;?>">
+                <option>Mark 1</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+                </div>
+              <div class="form-group">
+                  <label for="inputMark2" class="sr-only">Mark 2</label>
+                   <select class="form-control" id="inputMark2" name="description2" value="<?php echo $description2;?>">
+                     <option>Mark 2</option>
+                     <option>1</option>
+                     <option>2</option>
+                     <option>3</option>
+                     <option>4</option>
+                     <option>5</option>
+                   </select>
+                     </div>
+                     <div class="form-group">
+                       <label for="inputMark3" class="sr-only">Mark 3</label>
+                        <select class="form-control" id="inputMark3" name="description3" value="<?php echo $description3;?>">
+                          <option>Mark 3</option>
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </select>
+                          </div>
+
              <div class="form-group">
                <?php if($update==true):?>
                  <button class="btn btn-lg btn-primary btn-block" name="update" type="submit">Update</button>
