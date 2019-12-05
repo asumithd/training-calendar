@@ -1,8 +1,24 @@
-      <?php require_once 'process4.php';?>
-      <?php require_once 'header.php';?>
+    <?php require_once 'process4.php';?>
+    <?php require_once 'header.php';?>
       <?php
         $mysqli = new mysqli('localhost','asumithd','Admin123@@','hrdcfa') or die (mysqli_error($mysqli));
         $result=$mysqli->query("select * from t_feedback") or die($mysqli->error());
+
+        $result1=$mysqli->query("SELECT * FROM t_training_schedule WHERE t_training_schedule.status1='Ongoing Program' or t_training_schedule.status1='New Program'") or die($mysqli->error());
+
+        $options="";
+        while ($row=mysqli_fetch_array($result1))
+        {
+          $options=$options."<option>$row[0]</option>";
+        }
+
+        $result2=$mysqli->query("SELECT * FROM t_nomination JOIN t_training_schedule ON t_nomination.course_id = t_training_schedule.id And t_training_schedule.status1='New Program' ") or die($mysqli->error());
+
+        $options1="";
+        while ($row1=mysqli_fetch_array($result2))
+        {
+          $options1=$options1."<option>$row1[1]</option>";
+        }
       ?>
       <main role="main" class="container" >
 
@@ -18,13 +34,18 @@
            </div>
            <div class="form-group">
             <label for="inputCourseid" class="sr-only">Course Id</label>
-            <input type="text" id="inputCourseid" class="form-control"
-             name="courseid" value="<?php echo $courseid;?>" placeholder="Course Id" required>
+            <select id="inputCourseid" class="form-control" name="courseid" value="<?php echo $courseid;?>" >
+              <option>Course Id</option>
+              <option><?php echo $options;?></option>
+            </select>
            </div>
            <div class="form-group">
             <label for="inputEmployeeId" class="sr-only">Employee Id</label>
-            <input type="text" id="inputEmployeeId" class="form-control"
-             name="empid" value="<?php echo $empid;?>" placeholder="Employee Id" required>
+            <select id="inputEmployeeId" class="form-control"name="empid" value="<?php echo $empid;?>" >
+              <option>Employee Id</option>
+              <option><?php echo $options1;?></option>
+            </select>
+            
            </div>
            <div class="form-group">
              <label for="inputMark1" class="sr-only">Mark 1</label>
@@ -69,7 +90,6 @@
              </div>
           </form>
         </div>
-
       </div>
       <div class="container">
         <div class="row justify_content_center">
@@ -106,5 +126,6 @@
           </table>
         </div>
       </div>
+    </main>
     </body>
   </html>

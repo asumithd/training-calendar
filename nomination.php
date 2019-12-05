@@ -1,8 +1,20 @@
 <?php require_once 'process3.php';?>
 <?php require_once 'header.php';?>
+<!--  -->
 <?php
   $mysqli = new mysqli('localhost','asumithd','Admin123@@','hrdcfa') or die (mysqli_error($mysqli));
-  $result=$mysqli->query("select * from t_nomination") or die($mysqli->error());
+  $result=$mysqli->query("SELECT * FROM t_nomination JOIN t_training_schedule on t_nomination.course_id = t_training_schedule.id And t_training_schedule.status1='New Program'")
+  or die($mysqli->error());
+  $result1=$mysqli->query("SELECT * FROM t_training_schedule WHERE t_training_schedule.status1='New Program' ") or die($mysqli->error());
+
+  $options="";
+  while ($row=mysqli_fetch_array($result1))
+  {
+    $options=$options."<option>$row[0]</option>";
+  }
+
+  // $result=$mysqli->query("SELECT * FROM t_nomination,t_training_schedule
+  // WHERE t_nomination.course_id=course_id or t_training_schedule.id=id ") or die($mysqli->error());
 ?>
 <main role="main" class="container" >
 
@@ -13,8 +25,11 @@
               <div class="row justify_content_center">
                 <div class="form-group">
               <label for="inputCourseid" class="sr-only">Course Id</label>
-              <input type="text" id="inputCourseid" class="form-control"
-               name="courseid" value="<?php echo $courseid;?>" placeholder="Course Id" required>
+              <select id="inputCourseid" class="form-control" name="courseid" value="<?php echo $courseid;?>">
+                <option>Course Id</option>
+                <option><?php echo $options;?></option>
+                <option><?php echo $options1;?></option>
+              </select>
              </div>
              <div class="form-group">
               <label for="inputEmployeeId" class="sr-only">Employee Id</label>

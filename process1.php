@@ -25,7 +25,7 @@ if(isset($_POST['submit']))
 
      header("location:employee.php");
 
-   $mysqli->query("INSERT INTO t_employee (emp_id, name, designation_id, category, section)
+   $mysqli->query("INSERT INTO t_employee (emp_id, name, desid, category, section)
    VALUES ('$empid','$empname','$desid','$category','$section')") or die($mysqli->error);
 
   }
@@ -51,7 +51,7 @@ if(isset($_POST['submit']))
      $row =$result->fetch_array();
      $empid=$row['emp_id'];
      $empname=$row['name'];
-     $desid=$row['designation_id'];
+     $desid=$row['desid'];
      $category=$row['category'];
      $section=$row['section'];
 
@@ -67,7 +67,7 @@ if(isset($_POST['submit']))
    $section=$_POST['section'];
 
 
-   $mysqli->query("update t_employee set emp_id='$empid',name='$empname', designation_id='$desid', category='$category',
+   $mysqli->query("update t_employee set emp_id='$empid',name='$empname', desid='$desid', category='$category',
    section='$section' where id='$id'") or die($mysqli->error);
 
    $_SESSION['message']="Record has been Updated";

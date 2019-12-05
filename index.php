@@ -1,92 +1,135 @@
-      <?php require_once 'process.php';?>
-      <!-- <?php require_once 'header.php';?> -->
-      <?php
-        $mysqli = new mysqli('localhost','asumithd','Admin123@@','hrdcfa') or die (mysqli_error($mysqli));
-        $result=$mysqli->query("select * from t_training_schedule") or die($mysqli->error());
-      ?>
-      <main role="main" class="container">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>HRD MANAGEMENT</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <!-- <link href="css/starter-template.css" rel="stylesheet">
+
+    <link href="css/signin.css" rel="stylesheet"> -->
+      <link href="css/new1.css" rel="stylesheet">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      </style>
+      <!-- Custom styles for this template -->
+    </head>
 
 
-      <div class="container" >
-        <?php require_once 'session.php';?>
-          <h1 class="h3 mb-3 font-weight-normal"> Circulr Update</h1>
-          <form class="form-inline" method="POST" action="process.php">
-            <div class="row justify_content_center">
-            <div class="form-group">
-            <label for="inputSerialNo" class="sr-only">Serial No</label>
-            <input type="hidden" id="inputSerialNo" class="form-control"
-             name="id" value="<?php echo $id;?>" placeholder="Serial No" required>
-           </div>
-           <div class="form-group">
-            <label for="inputDescription" class="sr-only">Description</label>
-            <input type="text" style="width:595px" id="inputDescription" class="form-control"
-             name="description" value="<?php echo $description;?>" placeholder="Description" required>
-           </div>
-           <div class="form-group">
-            <label for="inputLocation" class="sr-only">Location</label>
-            <input type="text" id="inputLocation" class="form-control"
-             name="location" value="<?php echo $location;?>" placeholder="Location" required>
-           </div>
-           <div class="form-group">
-            <label for="inputStatus" class="sr-only">Status</label>
-            <input type="text" id="inputStatus" class="form-control"
-             name="status" value="<?php echo $status;?>" placeholder="Status" required>
-           </div>
-           <div class="form-group">
-            <label for="inputChief Guest" class="sr-only">Chief Guest</label>
-            <input type="text" id="inputChiefGuest" class="form-control"
-             name="chiefguest" value="<?php echo $chiefguest;?>" placeholder="Chief Guest" required>
-           </div>
-           <div class="form-group">
-            <label for="inputSubject Name" class="sr-only">Subject Name</label>
-            <input type="text" id="inputSubjectName" class="form-control"
-             name="subjectname" value="<?php echo $subjectname;?>" placeholder="Subject Name" required>
-           </div>
-           <div class="form-group">
-            <label for="inputSubject Categrie" class="sr-only">Subject Categrie</label>
-            <input type="text" id="inputSubjectCategrie" class="form-control"
-             name="subjectcategrie" value="<?php echo $subjectcategrie;?>" placeholder="Subject Categrie" required>
-           </div>
-           <div class="form-group">
-            <label for="inputStart Date" class="sr-only">Start Date</label>
-            <input type="date" id="inputStartDate" class="form-control"
-             name="startdate" value="<?php echo $startdate;?>" placeholder="Start Date" required>
-           </div>
-           <div class="form-group">
-            <label for="inputEnd Date" class="sr-only">End Date</label>
-            <input type="date" id="inputEndDate" class="form-control"
-             name="enddate" value="<?php echo $enddate;?>" placeholder="End Date" required>
-           </div>
-             <div class="form-group">
-               <?php if($update==true):?>
-                 <button class="btn btn-lg btn-primary btn-block" name="update" type="submit">Update</button>
-               <?php else: ?>
-                 <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Save</button>
-               <?php endif; ?>
-             </div>
+<?php
+  $mysqli = new mysqli('localhost','asumithd','Admin123@@','hrdcfa') or die (mysqli_error($mysqli));
+  $result=$mysqli->query("select * from t_training_schedule") or die($mysqli->error());
+  $result2=$mysqli->query("SELECT * from t_attendance ")or die($mysqli->error());
+  $result3=$mysqli->query("select * from t_employee") or die($mysqli->error());
+  $result4=$mysqli->query("SELECT * FROM t_nomination JOIN t_training_schedule on t_nomination.course_id = t_training_schedule.id And t_training_schedule.status1='New Program'")
+  or die($mysqli->error());
 
-          </form>
+?>
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Training Calender</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="employee.php">Employee</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.php">Circular</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="nomination.php">Nomination</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="attendance.php">Attendance</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="feedback.php">Feedback</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href=" "> </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.php">LogOut ?</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+<div class="container1">
+    <div class="box" >
+        <div class="row justify_content_center">
+        <h2>Employee List</h2>
+          <table class="table">
+          <thead>
+            <tr>
+
+              <th>Emp Id</th>
+              <th>Employee Name</th>
+              <th>Designation</th>
+              <th>Category</th>
+              <th>Section</th>
+
+            </tr>
+          </thead>
+
+          <?php
+          while($row=$result3->fetch_assoc()):
+            ?>
+            <tr>
+
+              <td><?php echo $row['emp_id'];?></td>
+              <td><?php echo $row['name'];?></td>
+              <td><?php echo $row['desid'];?></td>
+              <td><?php echo $row['category'];?></td>
+              <td><?php echo $row['section'];?></td>
+
+            </tr>
+          <?php endwhile; ?>
+          </table>
         </div>
-
       </div>
-
-
-        <div class="container">
+    <div class="box" >
           <div class="row justify_content_center">
           <h2>Circular Details</h2>
             <table class="table">
             <thead>
               <tr>
-                <th>Serial No</th>
+
                 <th>Description</th>
                 <th>Location</th>
-                <th>Status</th>
-                <th>Chief Guest</th>
-                <th>Subject Name</th>
-                <th>Subject Categrie</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Action</th>
+                <th style="width:8em">Status</th>
+                <th>Guest</th>
+                <th>Name</th>
+                <th>Categrie</th>
+                <th style="width:7em">Start Dt</th>
+                <th style="width:7em">End Dt</th>
+
               </tr>
             </thead>
 
@@ -94,24 +137,83 @@
             while($row=$result->fetch_assoc()):
               ?>
               <tr>
-                <td><?php echo $row['id'];?></td>
+
                 <td><?php echo $row['description'];?></td>
                 <td><?php echo $row['location'];?></td>
-                <td><?php echo $row['status'];?></td>
+                <td><?php echo $row['status1'];?></td>
                 <td><?php echo $row['faculty'];?></td>
                 <td><?php echo $row['category_for_course'];?></td>
                 <td><?php echo $row['course_type'];?></td>
                 <td><?php echo $row['from_date'];?></td>
                 <td><?php echo $row['to_date'];?></td>
-                <td>
-                  <a href="index.php?edit=<?php echo $row['id'];?>" class="btn btn-warning">Edit</a>
-                  <a href="process.php?delete=<?php echo $row['id'];?>" class="btn btn-danger">Delete</a>
-                </td>
+
               </tr>
             <?php endwhile; ?>
             </table>
           </div>
         </div>
+    <div class="box">
+        <div class="row justify_content_center">
+        <h2>Employee Nomination Details</h2>
+          <table class="table">
+          <thead>
+            <tr>
+              <th>Course Id</th>
+              <th>Employee Id</th>
+              <th>Status</th>
 
-    </body>
-    </html>
+            </tr>
+          </thead>
+
+          <?php
+          while($row=$result4->fetch_assoc()):
+            ?>
+            <tr>
+              <td><?php echo $row['course_id'];?></td>
+              <td><?php echo $row['emp_id'];?></td>
+              <td><?php echo $row['status'];?></td>
+
+            </tr>
+          <?php endwhile; ?>
+          </table>
+        </div>
+      </div>
+    <div class="box">
+        <div class="row justify_content_center">
+        <h2>Employee Attendance Details</h2>
+          <table class="table">
+          <thead>
+            <tr>
+
+              <th>Course Id</th>
+              <th>Employee Id</th>
+              <th>Date</th>
+              <th>Attendance</th>
+
+            </tr>
+          </thead>
+
+          <?php
+          while($row=$result2->fetch_assoc()):
+            ?>
+            <tr>
+
+              <td><?php echo $row['course_id'];?></td>
+              <td><?php echo $row['emp_id'];?></td>
+              <td><?php echo $row['p_date'];?></td>
+              <td><?php echo $row['attendance'];?></td>
+
+            </tr>
+          <?php endwhile; ?>
+          </table>
+        </div>
+      </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>

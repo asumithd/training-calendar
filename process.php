@@ -32,7 +32,7 @@ if(isset($_POST['submit']))
 
      header("location:index.php");
 
-   $mysqli->query("INSERT INTO t_training_schedule (description, location, status, faculty, category_for_course, course_type, from_date, to_date)
+   $mysqli->query("INSERT INTO t_training_schedule (description, location, status1, faculty, category_for_course, course_type, from_date, to_date)
    VALUES ('$description','$location','$status','$chiefguest','$subjectname','$subjectcategrie','$startdate','$enddate')") or die($mysqli->error);
 
   }
@@ -60,7 +60,7 @@ if(isset($_POST['submit']))
       $row =$result->fetch_array();
       $description=$row['description'];
       $location=$row['location'];
-      $status=$row['status'];
+      $status=$row['status1'];
       $chiefguest=$row['faculty'];
       $subjectname=$row['category_for_course'];
       $subjectcategrie=$row['course_type'];
@@ -81,7 +81,7 @@ if(isset($_POST['submit']))
     $startdate=$_POST['startdate'];
     $enddate=$_POST['enddate'];
 
-    $mysqli->query("update t_training_schedule set description='$description', location='$location', status='$status',
+    $mysqli->query("update t_training_schedule set description='$description', location='$location', status1='$status',
     faculty='$chiefguest', category_for_course='$subjectname', course_type='$subjectcategrie', from_date='$startdate',
     to_date='$enddate' where id='$id'") or die($mysqli->error);
 

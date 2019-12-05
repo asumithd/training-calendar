@@ -23,9 +23,9 @@ if(isset($_POST['submit']))
 }
 if(isset($_GET['delete']))
 {
-  $empid=$_GET['delete'];
+  $id=$_GET['delete'];
 
-  $mysqli->query("delete from t_attendance where emp_id='$empid'") or die($mysqli->error);
+  $mysqli->query("delete from t_attendance where id='$id'") or die($mysqli->error);
 
   $_SESSION['message']="Record has been Deleted";
   $_SESSION['msg_type']="danger";
