@@ -81,7 +81,7 @@
       </form>
     </div>
   </nav>
-<div class="container1">
+<!-- <div class="container1">
     <div class="box" >
         <div class="row justify_content_center">
         <h2>Employee List</h2>
@@ -208,7 +208,7 @@
           </table>
         </div>
       </div>
-</div>
+</div> -->
 
 
 

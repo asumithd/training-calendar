@@ -99,7 +99,7 @@
                 <a class="nav-link" href=" "> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.php">LogOut ?</a>
+                <a class="nav-link" href="logout.php">LogOut ?</a>
               </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

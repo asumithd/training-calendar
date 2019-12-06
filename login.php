@@ -32,7 +32,7 @@
     <body>
       <?php require_once 'log.php';?>
 
-    <form class="form-signin" method="post" action="#" style="text-align:center;">
+    <form class="form-signin" method="post" style="text-align:center;">
       <img class="mb-4" src="img/logo.png" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       <label for="inputEmail" class="sr-only">User name</label>
@@ -41,7 +41,7 @@
       <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
-    
+
 
   </body>
 </html>
